@@ -1,41 +1,41 @@
 import './style.css'
-import MovieGrid from './MovieGrid.jsx'
+import MovieGrid from './components/MovieGrid.jsx'
 import GetMovies from './api_calls/popularMovies.js'
 import { useEffect, useState } from 'react'
 
 export default function App() {
 
 
-    const [popularMovies, setPopularMovies] = useState([])
-    const [favorites, setFavorites] = useState(() => {
-        // Load favorites from localStorage on initial render
-        const savedFavorites = localStorage.getItem('favorites');
-        return savedFavorites ? JSON.parse(savedFavorites) : [];
-    });
+  const [popularMovies, setPopularMovies] = useState([])
+  const [favorites, setFavorites] = useState(() => {
+    // Load favorites from localStorage on initial render
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
-    useEffect(() => {
-        async function fetchData() {
-            const data = await GetMovies('/3/movie/popular')
-            setPopularMovies(data)
-        }
-        fetchData()
-    }, [])
-
-    useEffect(()=>{
-      localStorage.setItem('favourites',JSON.stringify(favorites))
-    }, [favorites])
-
-    function toggleFavorite(movieId) {
-        setFavorites(currentFavorites => {
-            if (currentFavorites.includes(movieId)) {
-                // Remove from favorites
-                return currentFavorites.filter(id => id !== movieId);
-            } else {
-                // Add to favorites
-                return [...currentFavorites, movieId];
-            }
-        });
+  useEffect(() => {
+    async function fetchData() {
+      const data = await GetMovies('/3/movie/popular')
+      setPopularMovies(data)
     }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('favourites', JSON.stringify(favorites))
+  }, [favorites])
+
+  function toggleFavorite(movieId) {
+    setFavorites(currentFavorites => {
+      if (currentFavorites.includes(movieId)) {
+        // Remove from favorites
+        return currentFavorites.filter(id => id !== movieId);
+      } else {
+        // Add to favorites
+        return [...currentFavorites, movieId];
+      }
+    });
+  }
 
   return (
     <>
@@ -85,16 +85,13 @@ export default function App() {
         </div>
 
         {/* movie grid */}
-        
-        <MovieGrid 
-                popularMovies={popularMovies} 
-                favorites={favorites}
-                onToggleFavorite={toggleFavorite}
-            />
-        
-        {/* <div className="movies-grid">
-          <MovieGrid />
-        </div> */}
+
+        <MovieGrid
+          popularMovies={popularMovies}
+          favorites={favorites}
+          onToggleFavorite={toggleFavorite}
+        />
+ 
 
         {/* pagination */}
         <div className="pagination">
@@ -124,7 +121,7 @@ export default function App() {
         <div className="modal-content">
           <button className="modal-close">×</button>
           <div className="modal-header">
-            <img src={null} alt="Movie backdrop"/>
+            <img src={null} alt="Movie backdrop" />
           </div>
           <div className="modal-body">
             <h2 className="modal-title">Movie Title Here</h2>
