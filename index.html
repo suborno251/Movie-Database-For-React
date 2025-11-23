@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Database</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <div className="container">
+
+        <div id="root"></div>
+
+    </div>
+
+    <!-- Movie Detail Modal -->
+
+
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- <script>
+        // Simple modal demo
+        document.querySelectorAll('.movie-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelector('.modal').classList.add('active');
+            });
+        });
+
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            document.querySelector('.modal').classList.remove('active');
+        });
+
+        document.querySelector('.modal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                document.querySelector('.modal').classList.remove('active');
+            }
+        });
+
+        // Favorite button demo
+        document.querySelectorAll('.favorite-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                btn.classList.toggle('active');
+                btn.textContent = btn.classList.contains('active') ? '♥' : '♡';
+            });
+        });
+    </script> -->
+</body>
+</html>
