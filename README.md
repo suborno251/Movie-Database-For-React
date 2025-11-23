@@ -18,7 +18,8 @@ A modern, responsive movie database application built with React that allows use
 
 ## 📸 Screenshots
 
-[Add screenshots of your app here]
+![Screenshot](screenshot.png)
+
 
 ## 🛠️ Technologies Used
 
