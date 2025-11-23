@@ -97,6 +97,9 @@ Before you begin, ensure you have the following installed:
 ```
 movie-database/
 ├── src/
+|   ├── api_calls/
+|   |   ├──popularMovies.js
+|   |
 │   ├── components/
 │   │   ├── MovieCard.jsx
 │   │   ├── MovieGrid.jsx
