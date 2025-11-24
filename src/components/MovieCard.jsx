@@ -15,7 +15,7 @@ export default function MovieCard({ id, poster_path, title, vote_average, releas
             <div className="movie-info">
                 <h3 className="movie-title">{title}</h3>
                 <div className="movie-meta">
-                    <span className="rating">⭐ {vote_average.toFixed(1)}</span>
+                    <span className="rating">⭐ {vote_average ? vote_average.toFixed(1): 'N/A' }</span>
                     <span>{release_date?.split('-')[0] || 'N/A'}</span>
                     <button 
                         className={`favorite-btn ${isFavorite ? 'active' : ''}`}

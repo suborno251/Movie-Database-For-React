@@ -11,5 +11,5 @@ export default async function GetMovies(params){
     });
 
     let data = await response.json();
-    return data.results;
+    return data.results ? data.results : [data];
 }
