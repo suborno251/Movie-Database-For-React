@@ -8,7 +8,7 @@ export default function App() {
 
   const [popularMovies, setPopularMovies] = useState([])
   const [favorites, setFavorites] = useState(() => {
-    // Load favorites from localStorage on initial render
+
     const savedFavorites = localStorage.getItem('favorites');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
@@ -91,7 +91,7 @@ export default function App() {
           favorites={favorites}
           onToggleFavorite={toggleFavorite}
         />
- 
+
 
         {/* pagination */}
         <div className="pagination">
