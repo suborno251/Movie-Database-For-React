@@ -2,24 +2,53 @@ import './style.css'
 import MovieGrid from './components/MovieGrid.jsx'
 import GetMovies from './api_calls/popularMovies.js'
 import { useEffect, useState } from 'react'
+import Tabs from './components/Tabs.jsx'
 
 export default function App() {
 
+  //Setting up for movies
+  const [Movies, setMovies] = useState([])
 
-  const [popularMovies, setPopularMovies] = useState([])
+  //Setting up for favourites
   const [favorites, setFavorites] = useState(() => {
-
     const savedFavorites = localStorage.getItem('favorites');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
+  //Setting up active tab
+  const [activeTab, setActiveTabs] = useState("Popular")
+
+  //Debug
+  console.log('Current Tab(App): ', activeTab)
+
   useEffect(() => {
     async function fetchData() {
-      const data = await GetMovies('/3/movie/popular')
-      setPopularMovies(data)
+      let endpoint = '';
+      if (activeTab === "Popular") {
+
+        endpoint = '/3/movie/popular';
+      } else if (activeTab === "Top Rated") {
+
+        endpoint = '/3/movie/top_rated';
+      } else if (activeTab === "Upcoming") {
+
+        endpoint = '/3/movie/upcoming';
+      } else if (activeTab === "Favorites") {
+
+        const allFavouriteMovies = []
+        
+        for (const id of favorites) {
+          if (id==='') return
+          const movieData = await GetMovies(`/3/movie/${id}`)
+          allFavouriteMovies.push(movieData)  // ← Add this
+        }
+        setMovies(allFavouriteMovies);
+      }
+      const data = await GetMovies(endpoint);
+      setMovies(data);
     }
     fetchData()
-  }, [])
+  }, [activeTab,favorites])
 
   useEffect(() => {
     localStorage.setItem('favourites', JSON.stringify(favorites))
@@ -28,7 +57,7 @@ export default function App() {
   function toggleFavorite(movieId) {
     setFavorites(currentFavorites => {
       if (currentFavorites.includes(movieId)) {
-        // Remove from favorites
+
         return currentFavorites.filter(id => id !== movieId);
       } else {
         // Add to favorites
@@ -77,17 +106,12 @@ export default function App() {
         </div>
 
         {/* tabs */}
-        <div className="tabs">
-          <button className="tab active">Popular</button>
-          <button className="tab">Top Rated</button>
-          <button className="tab">Upcoming</button>
-          <button className="tab">Favorites</button>
-        </div>
+        <Tabs activeTab={activeTab} onTabChange={setActiveTabs} />
 
         {/* movie grid */}
 
         <MovieGrid
-          popularMovies={popularMovies}
+          popularMovies={Movies}
           favorites={favorites}
           onToggleFavorite={toggleFavorite}
         />
