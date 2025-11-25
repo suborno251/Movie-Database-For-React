@@ -4,6 +4,7 @@ import GetMovies from './api_calls/popularMovies.js'
 import { useEffect, useState } from 'react'
 import Tabs from './components/Tabs.jsx'
 import Pagination from './components/Pagination.jsx'
+import Search from './components/Search.jsx'
 
 export default function App() {
 
@@ -27,12 +28,12 @@ export default function App() {
     async function fetchData() {
       let endpoint = '';
       if (activeTab === "Popular") {
-      endpoint = `/3/movie/popular?page=${currentPage}`;  
-    } else if (activeTab === "Top Rated") {
-      endpoint = `/3/movie/top_rated?page=${currentPage}`;  
-    } else if (activeTab === "Upcoming") {
-      endpoint = `/3/movie/upcoming?page=${currentPage}`;  
-    } else if (activeTab === "Favorites") {
+        endpoint = `/3/movie/popular?page=${currentPage}`;
+      } else if (activeTab === "Top Rated") {
+        endpoint = `/3/movie/top_rated?page=${currentPage}`;
+      } else if (activeTab === "Upcoming") {
+        endpoint = `/3/movie/upcoming?page=${currentPage}`;
+      } else if (activeTab === "Favorites") {
         const allFavouriteMovies = []
 
         for (const id of favorites) {
@@ -66,6 +67,12 @@ export default function App() {
     });
   }
 
+  async function genre_listing() {
+    const endpoint = "/3/genre/movie/list?language=en";
+    const data = await GetMovies(endpoint);
+    return data.JSON
+    // console.log(data);
+  }
   return (
     <>
       <div className="container">
@@ -75,35 +82,7 @@ export default function App() {
         </header>
 
         {/* search */}
-        <div className="search-section">
-          <div className="search-bar">
-            <input type="text" placeholder="Search for movies..." id="searchInput" />
-            <button>Search</button>
-          </div>
-          <div className="filters">
-            <select>
-              <option value="">All Genres</option>
-              <option value="28">Action</option>
-              <option value="35">Comedy</option>
-              <option value="18">Drama</option>
-              <option value="27">Horror</option>
-              <option value="10749">Romance</option>
-              <option value="878">Sci-Fi</option>
-            </select>
-            <select>
-              <option value="popularity.desc">Most Popular</option>
-              <option value="vote_average.desc">Highest Rated</option>
-              <option value="release_date.desc">Latest Release</option>
-            </select>
-            <select>
-              <option value="">All Years</option>
-              <option value="2024">2024</option>
-              <option value="2023">2023</option>
-              <option value="2022">2022</option>
-              <option value="2021">2021</option>
-            </select>
-          </div>
-        </div>
+        <Search query={genre_listing}/>
 
         {/* tabs */}
         <Tabs activeTab={activeTab} onTabChange={setActiveTabs} />
