@@ -1,13 +1,13 @@
 import MovieCard from "./MovieCard";
 
-export default function MovieGrid({ popularMovies, favorites, onToggleFavorite }) {
+export default function MovieGrid({ Movies, favorites, onToggleFavorite }) {
 
-    if (!popularMovies) return null;
+    if (!Movies) return null;
 
-    console.log(popularMovies)
+    console.log(Movies)
     return (
         <div className="movies-grid">
-            {popularMovies.map(movie => (
+            {Movies.map(movie => (
                 <MovieCard
                     key={movie.id}
                     {...movie}
