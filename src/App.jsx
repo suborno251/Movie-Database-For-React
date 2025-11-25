@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react'
 import Tabs from './components/Tabs.jsx'
 import Pagination from './components/Pagination.jsx'
 import Search from './components/Search.jsx'
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 export default function App() {
+  <SpeedInsights />
 
   //Setting up for movies
   const [Movies, setMovies] = useState([])
@@ -82,7 +84,7 @@ export default function App() {
         </header>
 
         {/* search */}
-        <Search query={genre_listing}/>
+        <Search query={genre_listing} />
 
         {/* tabs */}
         <Tabs activeTab={activeTab} onTabChange={setActiveTabs} />
