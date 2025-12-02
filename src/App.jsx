@@ -8,7 +8,6 @@ import Search from './components/Search.jsx'
 import { SpeedInsights } from "@vercel/speed-insights/react"
 
 export default function App() {
-  <SpeedInsights />
 
   //Setting up for movies
   const [Movies, setMovies] = useState([])
@@ -78,6 +77,7 @@ export default function App() {
   return (
     <>
       <div className="container">
+        <SpeedInsights />
         <header>
           <h1>🎬 Movie Database</h1>
           <p>Discover your next favorite movie</p>
