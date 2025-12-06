@@ -76,7 +76,6 @@ export default function App() {
   return (
     <>
       <div className="container">
-        <SpeedInsights />
         <header>
           <h1>🎬 Movie Database</h1>
           <p>Discover your next favorite movie</p>
