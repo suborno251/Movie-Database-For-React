@@ -10,5 +10,6 @@ export default async function GetMovies(params) {
     });
 
     let data = await response.json();
+    console.log('Data from API: ',data)
     return data;
 }

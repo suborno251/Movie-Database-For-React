@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import Tabs from './components/Tabs.jsx'
 import Pagination from './components/Pagination.jsx'
 import Search from './components/Search.jsx'
-import { SpeedInsights } from "@vercel/speed-insights/react"
 
 export default function App() {
 
