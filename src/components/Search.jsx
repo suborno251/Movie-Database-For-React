@@ -6,8 +6,12 @@ export default function Search({ onSearch }) {
 
     function handleSearch(e) {
         e.preventDefault()
-        if (input === "") return
+        if (input === ""){
+            onSearch("")
+            return
+        } 
         onSearch(input)
+        setInput("")
     }
     return <form onSubmit={handleSearch} className="search-section">
         <div className="search-bar">

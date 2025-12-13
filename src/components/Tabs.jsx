@@ -3,7 +3,7 @@ import GetMovies from "../api_calls/getMovies"
 export default function Tabs({ activeTab, onTabChange }) {
     const tabs = ['Popular', 'Top Rated', 'Upcoming', 'Favorites']
     //Debug
-    console.log('Current Tab(Tabs): ',activeTab)
+    // console.log('Current Tab(Tabs): ',activeTab)
 
     return < div className="tabs" >
         {

@@ -4,7 +4,7 @@ export default function MovieGrid({ Movies, favorites, onToggleFavorite }) {
 
     if (!Movies) return null;
 
-    console.log(Movies)
+    // console.log(Movies)
     return (
         <div className="movies-grid">
             {Movies.map(movie => (

@@ -28,9 +28,9 @@ export default function App() {
   useEffect(() => {
     async function fetchData() {
       let endpoint = '';
-      if(searchQuery){
+      if (searchQuery) {
         endpoint = `/3/search/movie?query=${searchQuery}&page=${currentPage}`;
-      }else  if (activeTab === "Popular") {
+      } else if (activeTab === "Popular") {
         endpoint = `/3/movie/popular?page=${currentPage}`;
       } else if (activeTab === "Top Rated") {
         endpoint = `/3/movie/top_rated?page=${currentPage}`;
@@ -72,7 +72,6 @@ export default function App() {
 
 
 
-
   return (
     <>
       <div className="container">
@@ -85,7 +84,13 @@ export default function App() {
         <Search onSearch={setSearchQuery} searchQuery={searchQuery} />
 
         {/* tabs */}
-        <Tabs activeTab={activeTab} onTabChange={setActiveTabs} />
+        <Tabs
+          activeTab={activeTab}
+          onTabChange={(tab) => {
+            setActiveTabs(tab)
+            setSearchQuery("") 
+          }}
+        />
 
         {/* movie grid */}
 
