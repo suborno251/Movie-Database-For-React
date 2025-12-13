@@ -23,11 +23,14 @@ export default function App() {
 
   //Setting up active tab
   const [activeTab, setActiveTabs] = useState("Popular")
+  const [searchQuery, setSearchQuery] = useState("")
 
   useEffect(() => {
     async function fetchData() {
       let endpoint = '';
-      if (activeTab === "Popular") {
+      if(searchQuery){
+        endpoint = `/3/search/movie?query=${searchQuery}&page=${currentPage}`;
+      }else  if (activeTab === "Popular") {
         endpoint = `/3/movie/popular?page=${currentPage}`;
       } else if (activeTab === "Top Rated") {
         endpoint = `/3/movie/top_rated?page=${currentPage}`;
@@ -49,7 +52,7 @@ export default function App() {
       setTotalPages(data.total_pages)
     }
     fetchData()
-  }, [activeTab, favorites, currentPage])
+  }, [activeTab, favorites, currentPage, searchQuery])
 
   useEffect(() => {
     localStorage.setItem('favourites', JSON.stringify(favorites))
@@ -67,12 +70,9 @@ export default function App() {
     });
   }
 
-  async function genre_listing() {
-    const endpoint = "/3/genre/movie/list?language=en";
-    const data = await GetMovies(endpoint);
-    return data.JSON
-    // console.log(data);
-  }
+
+
+
   return (
     <>
       <div className="container">
@@ -82,7 +82,7 @@ export default function App() {
         </header>
 
         {/* search */}
-        <Search query={genre_listing} />
+        <Search onSearch={setSearchQuery} searchQuery={searchQuery} />
 
         {/* tabs */}
         <Tabs activeTab={activeTab} onTabChange={setActiveTabs} />

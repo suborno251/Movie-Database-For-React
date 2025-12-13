@@ -1,15 +1,26 @@
-export default function Search({query}) {
+import { useState } from "react"
 
-    // const genres = query();
+export default function Search({ onSearch }) {
 
-    return <div className="search-section">
+    const [input, setInput] = useState('')
+
+    function handleSearch(e) {
+        e.preventDefault()
+        if (input === "") return
+        onSearch(input)
+    }
+    return <form onSubmit={handleSearch} className="search-section">
         <div className="search-bar">
-            <input type="text" placeholder="Search for movies..." id="searchInput" />
+            <input
+                type="text"
+                placeholder="Search for movies..."
+                id="searchInput"
+                onChange={e => setInput(e.target.value)}
+            />
             <button>Search</button>
         </div>
         <div className="filters">
             <select>
-                {console.log("query: ",query)}
                 <option value="">All Genres</option>
                 <option value="28">Action</option>
                 <option value="35">Comedy</option>
@@ -31,5 +42,5 @@ export default function Search({query}) {
                 <option value="2021">2021</option>
             </select>
         </div>
-    </div>
+    </form>
 }
