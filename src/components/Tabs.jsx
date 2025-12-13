@@ -1,4 +1,4 @@
-import GetMovies from "../api_calls/popularMovies"
+import GetMovies from "../api_calls/getMovies"
 
 export default function Tabs({ activeTab, onTabChange }) {
     const tabs = ['Popular', 'Top Rated', 'Upcoming', 'Favorites']

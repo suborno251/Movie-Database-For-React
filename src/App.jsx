@@ -1,6 +1,6 @@
 import './style.css'
 import MovieGrid from './components/MovieGrid.jsx'
-import GetMovies from './api_calls/popularMovies.js'
+import GetMovies from './api_calls/getMovies.js'
 import { useEffect, useState } from 'react'
 import Tabs from './components/Tabs.jsx'
 import Pagination from './components/Pagination.jsx'
