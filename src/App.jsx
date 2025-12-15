@@ -8,15 +8,15 @@ import Search from './components/Search.jsx'
 
 export default function App() {
 
-  //Setting up for movies
-  const [Movies, setMovies] = useState([])
-
+  
   //Setting up for favourites
   const [favorites, setFavorites] = useState(() => {
     const savedFavorites = localStorage.getItem('favorites');
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
-
+  
+  //Setting up for movies
+  const [Movies, setMovies] = useState([])
   //Setting up for paginations
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
@@ -30,7 +30,6 @@ export default function App() {
   const [selectedYear, setSelectedYear] = useState("")
 
   useEffect(() => {
-
     async function fetchData() {
       let endpoint = '';
       if (searchQuery) {
