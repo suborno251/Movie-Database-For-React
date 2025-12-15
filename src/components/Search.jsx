@@ -1,18 +1,34 @@
 import { useState } from "react"
 
-export default function Search({ onSearch }) {
+export default function Search({ onSearch, selectedGenre, selectedSort, selectedYear, setSelectedGenre, setSelectedSort, setSelectedYear }) {
 
     const [input, setInput] = useState('')
 
+    const genres = {
+        "": "All Genres",
+        28: "Action",
+        35: "Comedy",
+        18: "Drama",
+        27: "Horror",
+        10749: "Romance",
+        878: "Sci-Fi",
+    }
+
+    const sortOptions = {
+        "popularity.desc": "Most Popular",
+        "vote_average.desc": "Highest Rated",
+        "release_date.desc": "Latest Release"
+    }
     function handleSearch(e) {
         e.preventDefault()
-        if (input === ""){
+        if (input === "") {
             onSearch("")
             return
-        } 
+        }
         onSearch(input)
         setInput("")
     }
+
     return <form onSubmit={handleSearch} className="search-section">
         <div className="search-bar">
             <input
@@ -24,26 +40,21 @@ export default function Search({ onSearch }) {
             <button>Search</button>
         </div>
         <div className="filters">
-            <select>
-                <option value="">All Genres</option>
-                <option value="28">Action</option>
-                <option value="35">Comedy</option>
-                <option value="18">Drama</option>
-                <option value="27">Horror</option>
-                <option value="10749">Romance</option>
-                <option value="878">Sci-Fi</option>
+            <select value={selectedGenre} onChange={e => setSelectedGenre(e.target.value)}>
+                {Object.entries(genres).map(([id, name]) => (
+                    <option key={id} value={id}>{name}</option>
+                ))}
             </select>
-            <select>
-                <option value="popularity.desc">Most Popular</option>
-                <option value="vote_average.desc">Highest Rated</option>
-                <option value="release_date.desc">Latest Release</option>
+            <select value={selectedSort} onChange={e => setSelectedSort(e.target.value)}>
+                {Object.entries(sortOptions).map(([value, label]) => (
+                    <option key={value} value={value}>{label}</option>
+                ))}
             </select>
-            <select>
+            <select value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
                 <option value="">All Years</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
+                {[2024, 2023, 2022, 2021].map(year => (
+                    <option key={year} value={year}>{year}</option>
+                ))}
             </select>
         </div>
     </form>

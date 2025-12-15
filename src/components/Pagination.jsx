@@ -1,9 +1,5 @@
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
 
-    // const [currentPage, setCurrentPage] = useState(1)
-    // const [totalPages, setTotalPages] = useState(0)
-    // console.log('currentPage:', currentPage)
-    // console.log('totalPages: ', totalPages)
     return <div className="pagination">
         < button
             disabled={currentPage === 1}

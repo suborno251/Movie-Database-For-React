@@ -25,11 +25,20 @@ export default function App() {
   const [activeTab, setActiveTabs] = useState("Popular")
   const [searchQuery, setSearchQuery] = useState("")
 
+  const [selectedGenre, setSelectedGenre] = useState("")
+  const [selectedSort, setSelectedSort] = useState("popularity.desc")
+  const [selectedYear, setSelectedYear] = useState("")
+
   useEffect(() => {
+
     async function fetchData() {
       let endpoint = '';
       if (searchQuery) {
         endpoint = `/3/search/movie?query=${searchQuery}&page=${currentPage}`;
+      } else if (selectedGenre || selectedYear) {
+        endpoint = `/3/discover/movie?page=${currentPage}&sort_by=${selectedSort}`;
+        if (selectedGenre) endpoint += `&with_genres=${selectedGenre}`;
+        if (selectedYear) endpoint += `&primary_release_year=${selectedYear}`;
       } else if (activeTab === "Popular") {
         endpoint = `/3/movie/popular?page=${currentPage}`;
       } else if (activeTab === "Top Rated") {
@@ -52,7 +61,7 @@ export default function App() {
       setTotalPages(data.total_pages)
     }
     fetchData()
-  }, [activeTab, favorites, currentPage, searchQuery])
+  }, [activeTab, favorites, currentPage, searchQuery, selectedGenre, selectedSort, selectedYear])
 
   useEffect(() => {
     localStorage.setItem('favourites', JSON.stringify(favorites))
@@ -81,14 +90,24 @@ export default function App() {
         </header>
 
         {/* search */}
-        <Search onSearch={setSearchQuery} searchQuery={searchQuery} />
+        <Search
+          onSearch={setSearchQuery}
+          selectedGenre={selectedGenre}
+          selectedSort={selectedSort}
+          selectedYear={selectedYear}
+          setSelectedGenre={setSelectedGenre}  // ← Match these names
+          setSelectedSort={setSelectedSort}
+          setSelectedYear={setSelectedYear}
+        />
 
         {/* tabs */}
         <Tabs
           activeTab={activeTab}
           onTabChange={(tab) => {
             setActiveTabs(tab)
-            setSearchQuery("") 
+            setSearchQuery("")
+            setSelectedGenre("")
+            setSelectedYear("")
           }}
         />
 
